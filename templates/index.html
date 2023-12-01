@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{ template "meta" }}
+    <link rel="stylesheet" href="/static/css/dark-style.css" />
+</head>
+
+<body id="body-app">
+
+{{ template "githubCorner" }}
+
+<header class="line has-background-primary"></header>
+
+<section class="profile section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-two-fifths">
+                <h1 class="title is-size-1"><%= content.data.profile.name %></h1>
+                <p class="subtitle"><%= content.data.profile.title %></p>
+            </div>
+            <div class="column is-2">
+                <figure class="image image is-128x128">
+                    <img alt="Profile photo" class="is-rounded" src="https://avatars.githubusercontent.com/u/50285623?v=4" /> <!--<%= content.data.profile.photo %>" />-->
+                </figure>
+            </div>
+            <div class="column has-text-grey-light has-text-right-in-desktop">
+                <p class="has-text-weight-light">
+                    <%= content.data.profile.city %>
+                </p>
+                <p class="has-text-weight-light">
+                    <%= content.data.profile.phone %>
+                </p>
+                <p class="has-text-weight-light">
+                    <%= content.data.profile.mail %>
+                </p>
+
+                <% include /socialIcons %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="hr"></div>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-three-fifths">
+                <div class="summary">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        SUMMARY
+                    </div>
+                    <div class="wrapper"><%- content.data.summary %></div>
+                </div>
+
+                <div class="experience">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        EXPERIENCE
+                    </div>
+
+                    <% content.data.experiences.forEach(function(experience){ %>
+                    <div class="item">
+                        <div class="is-size-5">
+                            <b><%= experience.company %>,</b>
+                            <span class="has-text-weight-semi-bold">
+									<%= experience.location %> — <i><%= experience.title %></i>
+								</span>
+                        </div>
+                        <div class="is-size-7 tag is-primary"><%= experience.period %></div>
+                        <% if (experience.jobdesc.length > 0) { %>
+                        <ul style="list-style: disc; margin-left: 1em">
+                            <% experience.jobdesc.forEach(function(job){ %>
+                            <li><%= job %></li>
+                            <% }); %>
+                        </ul>
+                        <% } %>
+                    </div>
+                    <% }); %>
+
+                </div>
+
+                <div class="education">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        EDUCATION
+                    </div>
+
+                    <% content.data.educations.forEach(function(education){ %>
+                    <div class="item">
+                        <div class="is-size-5">
+                            <b><%= education.name %></b>,
+                            <span class="has-text-weight-semi-bold">
+									<%= education.city %> — <i><%= education.degree %></i>
+								</span>
+                        </div>
+                        <div class="is-size-7 tag is-primary"><%= education.period %></div>
+                        <div><%= education.faculty %></div>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+            <div class="column">
+                <div class="projects">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        PROJECTS
+                    </div>
+
+                    <% content.data.projects.forEach(function(proj){ %>
+                    <div class="item">
+                        <div class="is-size-5">
+                            <b><%= proj.title %></b>
+                            —
+                            <i><%= proj.company %></i>
+                        </div>
+                        <div class="is-size-7 tag is-primary"><%= proj.period %></div>
+                    </div>
+                    <% }); %>
+                </div>
+
+                <div class="skills">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        SKILLS
+                    </div>
+                    <div class="wrapper">
+                        <% content.data.skills.forEach(function(skill){ %>
+                        <div class="item">
+                            <div><%= skill.name %></div>
+                        </div>
+                        <% }); %>
+                    </div>
+                </div>
+
+                <div class="languages">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        LANGUAGES
+                    </div>
+                    <div class="wrapper">
+                        <%= content.data.languages.join(', ') %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <a href="<%= content.config.publicPath %>/light">See Light Theme</a>
+        <br />
+        Copyright © 2018-2019 by
+        <a href="https://mazipan.space">Irfan Maulana</a>
+    </div>
+</footer>
+
+<footer class="line has-background-primary"></footer>
+
+{{ template "jsonLd" }}
+</body>
+
+</html>

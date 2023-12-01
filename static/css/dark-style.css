@@ -1,0 +1,5 @@
+@import url(bulma-dracula.css);
+@import url(base.css);
+:root {
+  --theme-color: #bd93f9;
+  --thin-color: #b5b5b5; }
