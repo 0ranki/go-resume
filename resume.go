@@ -1,7 +1,8 @@
 package main
 
 type Resume struct {
-	Meta Meta `yaml:"meta"`
+	Theme string `yaml:"theme"`
+	Meta  *Meta  `yaml:"meta"`
 }
 
 type job struct {

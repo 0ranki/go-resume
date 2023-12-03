@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"slices"
+	"strings"
 )
 
 //go:embed "static/css/*.css" "templates/*.html"
@@ -45,6 +46,11 @@ func home(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		slog.Error(err.Error())
 		http.Error(w, "Server error", http.StatusInternalServerError)
+	}
+	// TODO: Theme from browser
+	if strings.HasSuffix(r.URL.Path, "/light") || strings.HasSuffix(r.URL.Path, "/dark") {
+		urlSlice := strings.Split(r.URL.Path, "/")
+		data.Theme = urlSlice[len(urlSlice)-1]
 	}
 	err = tmpl.Execute(w, *data)
 	if err != nil {

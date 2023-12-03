@@ -3,7 +3,7 @@
 
 <head>
     {{ template "meta" .Meta }}
-    <link rel="stylesheet" href="/static/css/dark-style.css" />
+    <link rel="stylesheet" href="/static/css/{{ .Theme }}-style.css" />
 </head>
 
 <body id="body-app">
@@ -146,7 +146,11 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
+        {{ if eq .Theme "light" }}
+        <a href="/dark">See Dark Theme</a>
+        {{ else }}
         <a href="/light">See Light Theme</a>
+        {{ end }}
         <br />
         Copyright © 2018-2019 by
         <a href="https://mazipan.space">Irfan Maulana</a>
