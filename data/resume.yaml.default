@@ -7,15 +7,15 @@ meta:
   language: "en-EN"
   author: "Job Applicant"
   theme-color: "#bd93f9"
-  title: "Go-Resume - dynamic resume"
-  description: "Software Developer"
-  favicon: ""
+  ## Set the page title (shown in the browser tab). If empty, "Name - Title" from profile will be used
+  title:
+  description: "Professional employee"
 theme: "dark"
 profile:
   name: "Job Applicant"
-  title: "Software Developer"
+  title: "Professional employee"
   city: "Oulu, Finland"
   phone: "+358 xx xxx xxxx"
   email: "iwannajob@email.com"
-  photo: "path-or-url-to-avatar"
+  photo: "https://url.to/profile/photo"
   socials: []

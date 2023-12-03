@@ -10,7 +10,13 @@
 <meta name="theme-color" content="{{ .Meta.ThemeColor }}" /> <!-- FROM YAML -->
 <!-- Dynamic tags end -->
 
-<title>{{ .Profile.Name }} - {{ .Profile.Title }}</title> <!-- FROM YAML -->
+<title>
+    {{ if .Meta.Title }}
+        {{ .Meta.Title }}
+    {{ else }}
+        {{ .Profile.Name }} - {{ .Profile.Title }}
+    {{ end }}
+</title> <!-- FROM YAML -->
 <link rel="icon" type="image/png" sizes="16x16" href="https://cloud.oranki.net/apps/theming/favicon?v=2659fc51" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com/css?family=Raleway" />
