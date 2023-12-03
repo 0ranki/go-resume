@@ -9,5 +9,13 @@ meta:
   theme-color: "#bd93f9"
   title: "Go-Resume - dynamic resume"
   description: "Software Developer"
-theme: "light"
-
+  favicon: ""
+theme: "dark"
+profile:
+  name: "Job Applicant"
+  title: "Software Developer"
+  city: "Oulu, Finland"
+  phone: "+358 xx xxx xxxx"
+  email: "iwannajob@email.com"
+  photo: "path-or-url-to-avatar"
+  socials: []

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"slices"
 	"strings"
+	"time"
 )
 
 //go:embed "static/css/*.css" "templates/*.html"
@@ -52,6 +53,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 		urlSlice := strings.Split(r.URL.Path, "/")
 		data.Theme = urlSlice[len(urlSlice)-1]
 	}
+	data.Year = time.Now().Format("2006")
 	err = tmpl.Execute(w, *data)
 	if err != nil {
 		slog.Error(err.Error())

@@ -1,8 +1,20 @@
 package main
 
 type Resume struct {
-	Theme string `yaml:"theme"`
-	Meta  *Meta  `yaml:"meta"`
+	Theme   string   `yaml:"theme"`
+	Meta    *Meta    `yaml:"meta"`
+	Profile *Profile `yaml:"profile"`
+	Year    string
+}
+
+type Profile struct {
+	Name    string  `yaml:"name"`
+	Title   string  `yaml:"title"`
+	City    string  `yaml:"city"`
+	Phone   string  `yaml:"phone"`
+	Email   string  `yaml:"email"`
+	Socials Socials `yaml:"socials"`
+	Photo   string  `yaml:"photo"`
 }
 
 type job struct {
@@ -32,13 +44,13 @@ type skill struct {
 
 type skills []skill
 
-type social struct {
+type Social struct {
 	Media  string `yaml:"media"`
 	UserId string `yaml:"userId"`
 	Link   string `yaml:"link"`
 }
 
-type socials []social
+type Socials []Social
 
 type Meta struct {
 	Language    string `yaml:"language"`

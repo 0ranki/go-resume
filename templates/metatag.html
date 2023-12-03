@@ -3,14 +3,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <!-- Dynamic tags -->
-<meta name="robots" content="{{ .Robots }}" /> <!-- FROM YAML -->
-<meta name="language" content="{{ .Language }}" /> <!-- FROM YAML -->
-<meta name="author" content="{{ .Author }}" /> <!-- FROM YAML -->
-<meta name="description" content="{{ .Description }}" /> <!-- FROM YAML -->
-<meta name="theme-color" content="{{ .ThemeColor }}" /> <!-- FROM YAML -->
+<meta name="robots" content="{{ .Meta.Robots }}" /> <!-- FROM YAML -->
+<meta name="language" content="{{ .Meta.Language }}" /> <!-- FROM YAML -->
+<meta name="author" content="{{ .Meta.Author }}" /> <!-- FROM YAML -->
+<meta name="description" content="{{ .Meta.Description }}" /> <!-- FROM YAML -->
+<meta name="theme-color" content="{{ .Meta.ThemeColor }}" /> <!-- FROM YAML -->
 <!-- Dynamic tags end -->
 
-<title>AUTHOR FROM YAML</title> <!-- FROM YAML -->
+<title>{{ .Profile.Name }} - {{ .Profile.Title }}</title> <!-- FROM YAML -->
 <link rel="icon" type="image/png" sizes="16x16" href="https://cloud.oranki.net/apps/theming/favicon?v=2659fc51" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com/css?family=Raleway" />

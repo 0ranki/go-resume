@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    {{ template "meta" .Meta }}
+    {{ template "meta" . }}
     <link rel="stylesheet" href="/static/css/{{ .Theme }}-style.css" />
 </head>
 
@@ -16,26 +16,30 @@
     <div class="container">
         <div class="columns">
             <div class="column is-two-fifths">
-                <h1 class="title is-size-1"><%= content.data.profile.name %></h1>
-                <p class="subtitle"><%= content.data.profile.title %></p>
+                <h1 class="title is-size-1">{{ .Profile.Name }}</h1>
+                <p class="subtitle">{{ .Profile.Title }}</p>
             </div>
             <div class="column is-2">
                 <figure class="image image is-128x128">
-                    <img alt="Profile photo" class="is-rounded" src="https://avatars.githubusercontent.com/u/50285623?v=4" /> <!--<%= content.data.profile.photo %>" />-->
+                    <img alt="Profile photo" class="is-rounded" src="{{ .Profile.Photo }}" /> <!--<%= content.data.profile.photo %>" />-->
                 </figure>
             </div>
             <div class="column has-text-grey-light has-text-right-in-desktop">
                 <p class="has-text-weight-light">
-                    <%= content.data.profile.city %>
+                    {{ .Profile.City }}
                 </p>
                 <p class="has-text-weight-light">
-                    <%= content.data.profile.phone %>
+                    {{ .Profile.Phone }}
                 </p>
                 <p class="has-text-weight-light">
-                    <%= content.data.profile.mail %>
+                    {{ .Profile.Email }}
                 </p>
 
+                {{ with .Profile.Socials }}
+                {{ range .Profile.Socials }}
                 <% include /socialIcons %>
+                {{ end }}
+                {{ end }}
             </div>
         </div>
     </div>
@@ -152,8 +156,9 @@
         <a href="/light">See Light Theme</a>
         {{ end }}
         <br />
-        Copyright © 2018-2019 by
-        <a href="https://mazipan.space">Irfan Maulana</a>
+        Copyright © {{ .Year }} {{ .Profile.Name }}. All rights Reserved.
+        <br />
+        Powered by <a href="https://github.com/0ranki/go-resume">go-resume</a>
     </div>
 </footer>
 
