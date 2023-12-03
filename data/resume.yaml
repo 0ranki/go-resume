@@ -1,0 +1,12 @@
+# Meta tag configuration
+# All keys correspond to a meta tag name attribute, and value content attribute
+# e.g. <meta name="robots" value="index, follow">
+meta:
+  # Set the content for the robots meta tag (noindex to disable search engine indexing)
+  robots: "index, follow"
+  language: "en-EN"
+  author: "Job Applicant"
+  theme-color: "#bd93f9"
+  title: "Go-Resume - dynamic resume"
+  description: "Software Developer"
+

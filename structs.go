@@ -1,5 +1,9 @@
 package main
 
+type Resume struct {
+	Meta Meta `yaml:"meta"`
+}
+
 type job struct {
 	Company     string   `yaml:"company"`
 	Location    string   `yaml:"location"`
@@ -34,3 +38,12 @@ type social struct {
 }
 
 type socials []social
+
+type Meta struct {
+	Language    string `yaml:"language"`
+	Author      string `yaml:"author"`
+	Title       string `yaml:"title"`
+	Description string `yaml:"description"`
+	Robots      string `yaml:"robots"`
+	ThemeColor  string `yaml:"theme-color"`
+}
