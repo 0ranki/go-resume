@@ -4,6 +4,22 @@
 <head>
     {{ template "meta" . }}
     <link rel="stylesheet" href="/static/css/{{ .Theme }}-style.css" />
+
+    <style>
+    {{ if .Profile.Skills }}
+        .skilltag {
+            display: inline-block;
+            width: {{ .Profile.GetTagWidth "skills" }};
+        }
+    {{ end }}
+    {{ if .Profile.Languages }}
+        .languagetag {
+            display: inline-block;
+            width: {{ .Profile.GetTagWidth "languages" }};
+        }
+    {{ end }}
+    </style>
+
 </head>
 
 <body id="body-app">
@@ -21,7 +37,7 @@
             </div>
             <div class="column is-2">
                 <figure class="image image is-128x128">
-                    <img alt="Profile photo" class="is-rounded" src="{{ .Profile.Photo }}" /> <!--<%= content.data.profile.photo %>" />-->
+                    <img alt="Profile photo" class="is-rounded" src="{{ .Profile.Photo }}" />
                 </figure>
             </div>
             <div class="column has-text-grey-light has-text-right-in-desktop">
@@ -55,55 +71,72 @@
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         SUMMARY
                     </div>
-                    <div class="wrapper"><%- content.data.summary %></div>
+                    <div class="wrapper">{{ .Profile.Summary }}</div>
                 </div>
 
+                {{ with .Profile.Experience }}
                 <div class="experience">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         EXPERIENCE
                     </div>
 
-                    <% content.data.experiences.forEach(function(experience){ %>
+                    <!--<% content.data.experiences.forEach(function(experience){ %>-->
+                    {{ range . }}
                     <div class="item">
                         <div class="is-size-5">
-                            <b><%= experience.company %>,</b>
-                            <span class="has-text-weight-semi-bold">
-									<%= experience.location %> — <i><%= experience.title %></i>
-								</span>
+<!--                            <div class="columns is-gapless">-->
+<!--                                <div class="column">-->
+                                    <span><b>{{ .Company }}</b></span>
+<!--                                </div>-->
+<!--                                <div class="column">-->
+                                    <span class="has-text-weight-semi-bold"> - <i>{{ .Title }}</i></span>
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
-                        <div class="is-size-7 tag is-primary"><%= experience.period %></div>
-                        <% if (experience.jobdesc.length > 0) { %>
+                        <div>{{ .Location }}</div>
+                        <div class="is-size-6 tag is-primary">{{ .Period }}</div>
+                        {{ with .Description }}
                         <ul style="list-style: disc; margin-left: 1em">
-                            <% experience.jobdesc.forEach(function(job){ %>
-                            <li><%= job %></li>
-                            <% }); %>
+                            {{ range . }}
+                            <li>{{ . | html }}</li>
+                            {{ end }}
                         </ul>
-                        <% } %>
+                        {{ end }}
                     </div>
-                    <% }); %>
+                    {{ end }}
 
                 </div>
+                {{ end }}
 
+                {{ with .Profile.Education }}
                 <div class="education">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         EDUCATION
                     </div>
 
-                    <% content.data.educations.forEach(function(education){ %>
+                    {{ range . }}
                     <div class="item">
                         <div class="is-size-5">
-                            <b><%= education.name %></b>,
-                            <span class="has-text-weight-semi-bold">
-									<%= education.city %> — <i><%= education.degree %></i>
-								</span>
+<!--                            <div class="columns is-gapless">-->
+<!--                                <div class="column">-->
+                                    <span><b>{{ .Degree }}</b>, </span>
+<!--                                </div>-->
+<!--                                <div class="column">-->
+                                    <span class="has-text-weight-semi-bold">{{ .Name }}</span>
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
-                        <div class="is-size-7 tag is-primary"><%= education.period %></div>
-                        <div><%= education.faculty %></div>
+                        <div>{{ .Faculty }}
+                        <div class="is-size-6 tag is-primary ml-5">{{ .Period }}</div>
+                        </div>
                     </div>
-                    <% }); %>
+                    {{ end }}
                 </div>
+                {{ end }}
             </div>
+            {{ if or .Profile.Projects (or .Profile.Skills .Profile.Languages) }}
             <div class="column">
+                {{ with .Profile.Projects }}
                 <div class="projects">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         PROJECTS
@@ -116,34 +149,57 @@
                             —
                             <i><%= proj.company %></i>
                         </div>
-                        <div class="is-size-7 tag is-primary"><%= proj.period %></div>
+                        <div class="is-size-6 tag is-primary"><%= proj.period %></div>
                     </div>
                     <% }); %>
                 </div>
+                {{ end }}
 
+                {{ with .Profile.Skills }}
                 <div class="skills">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         SKILLS
                     </div>
                     <div class="wrapper">
-                        <% content.data.skills.forEach(function(skill){ %>
+                        {{ range . }}
                         <div class="item">
-                            <div><%= skill.name %></div>
+                            <div class="field is-grouped is-grouped-multiline">
+                                <div class="control">
+                                    <div class="tags has-addons">
+                                        <span class="skilltag tag is-size-6">{{ .Name }}</span>
+                                        {{ .VisualLevel .Level }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <% }); %>
+                        {{ end }}
                     </div>
                 </div>
+                {{ end }}
 
+                {{ with .Profile.Languages }}
                 <div class="languages">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         LANGUAGES
                     </div>
                     <div class="wrapper">
-                        <%= content.data.languages.join(', ') %>
+                        {{ range . }}
+                        <div class="item">
+                            <div class="field is-grouped is-grouped-multiline">
+                                <div class="control">
+                                    <div class="tags has-addons">
+                                        <span class="languagetag tag is-size-6">{{ .Name }}</span>
+                                        {{ .VisualLevel .Level }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ end }}
                     </div>
                 </div>
-
+                {{ end }}
             </div>
+            {{ end }}
         </div>
     </div>
 </section>
