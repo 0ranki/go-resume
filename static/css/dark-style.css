@@ -1,5 +1,13 @@
 @import url(bulma-dracula.css);
 @import url(base.css);
 :root {
-  --theme-color: #bd93f9;
-  --thin-color: #b5b5b5; }
+  --theme-color: #b5b5b5;
+  --thin-color: #bd93f9;
+  --title-color: #F8F8F2;
+  --subtitle-color: #d9d9d4; }
+
+.title {
+  color: var(--title-color); }
+
+.subtitle {
+  color: var(--subtitle-color); }
