@@ -22,7 +22,7 @@ func main() {
 	cfgFile := flag.String("config", "./data/resume.yaml", "Path to the configuration YAML")
 	flag.Parse()
 
-	_, err := readConfig(*cfgFile)
+	cfg, err := readConfig(*cfgFile)
 	if err != nil {
 		slog.Error(fmt.Sprintf("error reading configuration: %s", err.Error()))
 		os.Exit(1)
@@ -34,7 +34,10 @@ func main() {
 	mux.HandleFunc("/light", home)
 	mux.HandleFunc("/dark", home)
 	mux.Handle("/static/", staticFileServer)
-
+	if photoIsLocal(cfg.Profile.Photo) {
+		dir, relDir := getPhotoPaths(cfg)
+		mux.Handle(dir, http.StripPrefix(dir, http.FileServer(http.Dir(relDir))))
+	}
 	slog.Info("Starting go-resume server, listening on port 3000")
 	err = http.ListenAndServe("0.0.0.0:3000", mux)
 	slog.Error(err.Error())

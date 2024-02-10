@@ -5,7 +5,7 @@ meta:
   # Set the content for the robots meta tag (noindex to disable search engine indexing)
   robots: "index, follow"
   language: "en-EN"
-  author: "Donald Duck"
+  author: "Mickey Mouse"
   # theme-color: "#bd93f9"
   title: ""
   description: "Professional job applicant"
@@ -13,12 +13,14 @@ meta:
   github-corner: false
 theme: "light"
 profile:
-  name: "Donald Duck"
+  name: "Mickey Mouse"
   title: "Professional job applicant"
   city: "City, Country"
   phone: "+358 xx xxx xxxx"
   email: "your@email.com"
-  photo: "url-to-photo"
+  ## Place a local photo in ./data/photo/, the path here is relative to the executable
+  ## Photo can be a link too, use the full URL (https://example.com/path/to/photo.jpg)
+  photo: "./data/photo/Mickey_Mouse_Steamboat_Willie.jpg"
   summary: >-
     Insert summary here. Multiple
     lines can be used, but line breaks are determined
