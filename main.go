@@ -17,6 +17,7 @@ import (
 var static embed.FS
 var templates map[string]*template.Template
 var configFile string
+var basePath string
 var strs map[string]map[string]string
 
 func main() {
@@ -29,13 +30,20 @@ func main() {
 		slog.Error(fmt.Sprintf("error reading configuration: %s", err.Error()))
 		os.Exit(1)
 	}
+	basePath = "/"
+	if cfg.Basepath != "" {
+		basePath = cfg.Basepath
+		if !strings.HasSuffix(basePath, "/") {
+			basePath = basePath + "/"
+		}
+	}
 	configFile = *cfgFile
 	staticFileServer := http.FileServer(http.FS(static))
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/light", home)
-	mux.HandleFunc("/dark", home)
-	mux.Handle("/static/", staticFileServer)
+	mux.HandleFunc(basePath, home)
+	mux.HandleFunc(basePath+"light", home)
+	mux.HandleFunc(basePath+"dark", home)
+	mux.Handle(basePath+"static/", http.StripPrefix(basePath, staticFileServer))
 	if photoIsLocal(cfg.Profile.Photo) {
 		dir, relDir := getPhotoPaths(cfg)
 		mux.Handle(dir, http.StripPrefix(dir, http.FileServer(http.Dir(relDir))))
@@ -46,7 +54,8 @@ func main() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	acceptedPages := []string{"/", "/light", "/dark"}
+	fmt.Println("Client: " + r.Header.Get("X-Forwarded-For") + " Request: " + r.URL.Path)
+	acceptedPages := []string{basePath, basePath + "light", basePath + "dark"}
 	if !slices.Contains(acceptedPages, r.URL.Path) {
 		http.NotFound(w, r)
 	}

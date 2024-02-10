@@ -6,10 +6,11 @@ import (
 )
 
 type Resume struct {
-	Theme   string   `yaml:"theme"`
-	Meta    *Meta    `yaml:"meta"`
-	Profile *Profile `yaml:"profile"`
-	Year    string
+	Basepath string   `yaml:"basepath"`
+	Theme    string   `yaml:"theme"`
+	Meta     *Meta    `yaml:"meta"`
+	Profile  *Profile `yaml:"profile"`
+	Year     string
 }
 
 type Profile struct {

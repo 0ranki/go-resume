@@ -7,7 +7,7 @@
 
 <head>
     {{ template "meta" . }}
-    <link rel="stylesheet" href="/static/css/{{ .Theme }}-style.css" />
+    <link rel="stylesheet" href="{{ .Basepath }}/static/css/{{ .Theme }}-style.css" />
     <style>
     {{ if .Profile.Skills }}
         .skilltag {
@@ -251,9 +251,9 @@
     <div class="content has-text-centered">
         <div class="noprint">
             {{ if eq .Theme "light" }}
-            <a href="/dark">{{ translate "see_dark" $lang }}</a>
+            <a href="{{ .Basepath }}/dark">{{ translate "see_dark" $lang }}</a>
             {{ else }}
-            <a href="/light">{{ translate "see_light" $lang }}</a>
+            <a href="{{ .Basepath }}/light">{{ translate "see_light" $lang }}</a>
             {{ end }}
             <br />
             Copyright © {{ .Year }} {{ .Profile.Name }}. {{ translate "all_rights_reserved" $lang }}
