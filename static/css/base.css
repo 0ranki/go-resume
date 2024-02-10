@@ -85,5 +85,9 @@ body {
     display: none; }
   .item {
     page-break-inside: avoid; }
+  .education {
+    page-break-before: always; }
   html {
-    color-adjust: exact; } }
+    color-adjust: exact; }
+  footer {
+    display: none; } }

@@ -49,13 +49,13 @@ func main() {
 		dir, relDir := getPhotoPaths(cfg)
 		mux.Handle(dir, http.StripPrefix(dir, http.FileServer(http.Dir(relDir))))
 	}
-	slog.Info(fmt.Sprintf("Starting go-resume server, listening on port %d", port))
-	err = http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", port), mux)
+	slog.Info(fmt.Sprintf("Starting go-resume server, listening on port %d", *port))
+	err = http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", *port), mux)
 	slog.Error(err.Error())
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	slog.Info(fmt.Sprintf("Client: %s Request: &s ", r.Header.Get("X-Forwarded-For"), r.URL.Path))
+	slog.Info(fmt.Sprintf("Client: %s Request: %s ", r.Header.Get("X-Forwarded-For"), r.URL.Path))
 	acceptedPages := []string{basePath, basePath + "light", basePath + "dark"}
 	if !slices.Contains(acceptedPages, r.URL.Path) {
 		http.NotFound(w, r)

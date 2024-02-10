@@ -25,7 +25,7 @@
     <script>function printPage() {
         if ("{{ .Theme }}" == "dark") {
             alert("{{ translate "print_dark" $lang }}")
-            window.location.replace("/light")
+            window.location.replace("{{ .Basepath }}/light")
         } else {
             window.print();
         }
