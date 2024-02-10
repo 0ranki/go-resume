@@ -23,6 +23,7 @@ var strs map[string]map[string]string
 func main() {
 	loadStrings()
 	cfgFile := flag.String("config", "./data/resume.yaml", "Path to the configuration YAML")
+	port := flag.Int("port", 3000, "Listening port")
 	flag.Parse()
 
 	cfg, err := readConfig(*cfgFile)
@@ -48,13 +49,13 @@ func main() {
 		dir, relDir := getPhotoPaths(cfg)
 		mux.Handle(dir, http.StripPrefix(dir, http.FileServer(http.Dir(relDir))))
 	}
-	slog.Info("Starting go-resume server, listening on port 3000")
-	err = http.ListenAndServe("0.0.0.0:3000", mux)
+	slog.Info(fmt.Sprintf("Starting go-resume server, listening on port %d", port))
+	err = http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", port), mux)
 	slog.Error(err.Error())
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Client: " + r.Header.Get("X-Forwarded-For") + " Request: " + r.URL.Path)
+	slog.Info(fmt.Sprintf("Client: %s Request: &s ", r.Header.Get("X-Forwarded-For"), r.URL.Path))
 	acceptedPages := []string{basePath, basePath + "light", basePath + "dark"}
 	if !slices.Contains(acceptedPages, r.URL.Path) {
 		http.NotFound(w, r)

@@ -3,7 +3,7 @@
 A dynamic resume site server using [Bulma CSS](https://github.com/jgthms/bulma) written in Go.
 Get up and running easily by defining the content in a single YAML file.
 
-If you have a public server, can serve the website on port 3000 (HTTP). Or run locally only to
+If you have a public server, can serve the website on port 3000 (configurable). Or run locally only to
 generate a PDF.
 
 ### Live example: [https://oranki.net/cv](https://oranki.net/cv)
@@ -30,6 +30,8 @@ of the free Word templates I've come across.
 - Start the server
 - The content is updated live, so you can make edits while the server is
   running
+- If you want to use a different port, start the binary with the
+  `--port <port>` flag
 
 ### Reverse proxy
 Running behind a reverse proxy is simple, e.g. for NGINX:
@@ -67,6 +69,8 @@ location block to the same, e.g. `basepath: "/cv"` in YAML, and
 ### Planned, but still missing features:
 - Socials list
 - Contact / contact info so it won't cause a spam wave
+- Setting the highlight color via configuration file
+- Dark theme print to PDF
 
 
 ## Special thanks
