@@ -21,6 +21,7 @@ These values correspond to tags in the `<head> section.
 - `meta.github-corner` enables/disables the GitHub link to this repo in the top-right corner
 - `meta.favicon` is still WIP, will point to a local or remote favicon assett
 - `meta.language` sets the language for the headings in the document (e.g. SUMMARY), also the `<meta name="language">` tag
+  - Only English and Finnish translations for now, but adding new ones is simple (not much to translate)
 - Others correspond to `<meta name="tag name">`
 ```YAML
 meta:
