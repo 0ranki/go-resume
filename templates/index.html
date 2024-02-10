@@ -25,6 +25,7 @@
     <script>function printPage() {
         if ("{{ .Theme }}" == "dark") {
             alert("{{ translate "print_dark" $lang }}")
+            window.location.replace("/light")
         } else {
             window.print();
         }
@@ -85,7 +86,7 @@
 <section class="section">
     <div class="container">
         <div class="summary">
-            <div class="title is-size-5 has-text-primary has-text-weight-bold">
+            <div class="title section-title is-size-5 has-text-weight-bold">
                 {{ translate "summary" $lang }}
             </div>
             <div class="wrapper">{{ .Profile.Summary | html }}</div>
@@ -98,7 +99,7 @@
 
                 {{ with .Profile.Experience }}
                 <div class="experience">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                    <div class="title section-title is-size-5 has-text-weight-bold">
                         {{ translate "experience" $lang }}
                     </div>
 
@@ -132,7 +133,7 @@
 
                 {{ with .Profile.Education }}
                 <div class="education">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                    <div class="title section-title is-size-5 has-text-weight-bold">
                         {{ translate "education" $lang }}
                     </div>
 
@@ -160,7 +161,7 @@
             <div class="column">
                 {{ with .Profile.Projects }}
                 <div class="projects">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                    <div class="title section-title is-size-5 has-text-weight-bold">
                         {{ translate "projects" $lang }}
                     </div>
 
@@ -180,7 +181,7 @@
 
                 {{ with .Profile.Skills }}
                 <div class="skills item">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                    <div class="title section-title is-size-5 has-text-weight-bold">
                         {{ translate "skills" $lang }}
                     </div>
                     <div class="wrapper">
@@ -202,7 +203,7 @@
 
                 {{ with .Profile.Languages }}
                 <div class="languages item">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                    <div class="title section-title is-size-5 has-text-weight-bold">
                         {{ translate "languages" $lang }}
                     </div>
                     <div class="wrapper">
@@ -224,7 +225,7 @@
 
                 {{ with .Profile.Certificates }}
                 <div class="certificates item">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                    <div class="title section-title is-size-5 has-text-weight-bold">
                         {{ translate "certificates" $lang }}
                     </div>
 

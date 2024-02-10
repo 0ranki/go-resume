@@ -92,3 +92,6 @@ body {
     page-break-inside: avoid; }
   html {
     color-adjust: exact; } }
+
+.tag:not(body).is-success {
+  background-color: var(--section-title-color); }

@@ -5,3 +5,7 @@
 
 @import "bulma.css";
 @import 'base.scss';
+
+.tag:not(body).is-success {
+  background-color: var(--section-title-color);
+}
