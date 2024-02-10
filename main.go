@@ -17,8 +17,10 @@ import (
 var static embed.FS
 var templates map[string]*template.Template
 var configFile string
+var strs map[string]map[string]string
 
 func main() {
+	loadStrings()
 	cfgFile := flag.String("config", "./data/resume.yaml", "Path to the configuration YAML")
 	flag.Parse()
 
@@ -53,7 +55,9 @@ func home(w http.ResponseWriter, r *http.Request) {
 		"templates/metatag.html",
 		"templates/githubCorner.html",
 	}
-	tmpl, err := template.ParseFS(static, templateFiles...)
+	var err error
+	tmpl := template.New("index").Funcs(templateFunctions())
+	tmpl, err = tmpl.ParseFS(static, templateFiles...)
 	if err != nil {
 		slog.Error(err.Error())
 		http.Error(w, "Server error", http.StatusInternalServerError)
@@ -69,7 +73,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 		data.Theme = urlSlice[len(urlSlice)-1]
 	}
 	data.Year = time.Now().Format("2006")
-	tmpl.Funcs(templateFunctions())
 	err = tmpl.Execute(w, *data)
 	if err != nil {
 		slog.Error(err.Error())
@@ -81,6 +84,12 @@ func templateFunctions() template.FuncMap {
 	return template.FuncMap{
 		"html": func(raw string) template.HTML {
 			return template.HTML(raw)
+		},
+		"translate": func(label, lang string) string {
+			if strs[lang][label] == "" {
+				return label + " (no translation)"
+			}
+			return strs[lang][label]
 		},
 	}
 }

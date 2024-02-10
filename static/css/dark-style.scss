@@ -15,3 +15,7 @@
 .subtitle {
   color: var(--subtitle-color);
 }
+
+.tag:not(body).is-primary {
+  color: #2f2f2f;
+}

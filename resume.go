@@ -13,19 +13,20 @@ type Resume struct {
 }
 
 type Profile struct {
-	Name       string      `yaml:"name"`
-	Title      string      `yaml:"title"`
-	City       string      `yaml:"city"`
-	Phone      string      `yaml:"phone"`
-	Email      string      `yaml:"email"`
-	Socials    Socials     `yaml:"socials"`
-	Photo      string      `yaml:"photo"`
-	Summary    string      `yaml:"summary"`
-	Experience []Job       `yaml:"experience"`
-	Education  []Education `yaml:"education"`
-	Skills     []Skill     `yaml:"skills"`
-	Projects   any         `yaml:"projects"`
-	Languages  []Language  `yaml:"languages"`
+	Name         string        `yaml:"name"`
+	Title        string        `yaml:"title"`
+	City         string        `yaml:"city"`
+	Phone        string        `yaml:"phone"`
+	Email        string        `yaml:"email"`
+	Socials      Socials       `yaml:"socials"`
+	Photo        string        `yaml:"photo"`
+	Summary      string        `yaml:"summary"`
+	Experience   []Job         `yaml:"experience"`
+	Education    []Education   `yaml:"education"`
+	Skills       []Skill       `yaml:"skills"`
+	Projects     any           `yaml:"projects"`
+	Languages    []Language    `yaml:"languages"`
+	Certificates []Certificate `yaml:"certificates"`
 }
 
 func (p *Profile) GetTagWidth(t string) string {
@@ -47,9 +48,9 @@ func (p *Profile) GetTagWidth(t string) string {
 	return fmt.Sprintf("%dch", l)
 }
 
-func (job *Job) html(raw string) template.HTML {
-	return template.HTML(raw)
-}
+//func (job *Job) html(raw string) template.HTML {
+//	return template.HTML(raw)
+//}
 
 type Job struct {
 	Company     string   `yaml:"company"`
@@ -92,8 +93,6 @@ func (language *Language) VisualLevel(level int) template.HTML {
 	return _visualLevel(level)
 }
 
-type skills []Skill
-
 type Social struct {
 	Media  string `yaml:"media"`
 	UserId string `yaml:"userId"`
@@ -115,4 +114,8 @@ type Meta struct {
 type Language struct {
 	Name  string `yaml:"name"`
 	Level int    `yaml:"level"`
+}
+
+type Certificate struct {
+	Name string `yaml:"name"`
 }

@@ -1,3 +1,7 @@
+{{ define "index" }}
+
+{{ $lang := .Meta.Language }}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +75,7 @@
             <div class="column is-three-fifths">
                 <div class="summary">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        SUMMARY
+                        {{ translate "summary" $lang }}
                     </div>
                     <div class="wrapper">{{ .Profile.Summary }}</div>
                 </div>
@@ -79,7 +83,7 @@
                 {{ with .Profile.Experience }}
                 <div class="experience">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        EXPERIENCE
+                        {{ translate "experience" $lang }}
                     </div>
 
                     <!--<% content.data.experiences.forEach(function(experience){ %>-->
@@ -113,7 +117,7 @@
                 {{ with .Profile.Education }}
                 <div class="education">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        EDUCATION
+                        {{ translate "education" $lang }}
                     </div>
 
                     {{ range . }}
@@ -141,9 +145,10 @@
                 {{ with .Profile.Projects }}
                 <div class="projects">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        PROJECTS
+                        {{ translate "projects" $lang }}
                     </div>
 
+                    <!--TODO: projects-->
                     <% content.data.projects.forEach(function(proj){ %>
                     <div class="item">
                         <div class="is-size-5">
@@ -160,7 +165,7 @@
                 {{ with .Profile.Skills }}
                 <div class="skills">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        SKILLS
+                        {{ translate "skills" $lang }}
                     </div>
                     <div class="wrapper">
                         {{ range . }}
@@ -182,7 +187,7 @@
                 {{ with .Profile.Languages }}
                 <div class="languages">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        LANGUAGES
+                        {{ translate "languages" $lang }}
                     </div>
                     <div class="wrapper">
                         {{ range . }}
@@ -200,6 +205,25 @@
                     </div>
                 </div>
                 {{ end }}
+
+                {{ with .Profile.Certificates }}
+                <div class="certificates">
+                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                        {{ translate "certificates" $lang }}
+                    </div>
+
+                    {{ range . }}
+                    <div class="item">
+                        <div class="is-size-5">
+                            <div class="tag is-size-6 is-primary text-dark" style="margin-bottom: 5px;">
+                                {{ .Name }}
+                            </div>
+
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
             </div>
             {{ end }}
         </div>
@@ -209,14 +233,14 @@
 <footer class="footer">
     <div class="content has-text-centered">
         {{ if eq .Theme "light" }}
-        <a href="/dark">See Dark Theme</a>
+        <a href="/dark">{{ translate "see_dark" $lang }}</a>
         {{ else }}
-        <a href="/light">See Light Theme</a>
+        <a href="/light">{{ translate "see_light" $lang }}</a>
         {{ end }}
         <br />
-        Copyright © {{ .Year }} {{ .Profile.Name }}. All rights Reserved.
+        Copyright © {{ .Year }} {{ .Profile.Name }}. {{ translate "all_rights_reserved" $lang }}
         <br />
-        Powered by <a href="https://github.com/0ranki/go-resume">go-resume</a>
+        {{ translate "powered_by" $lang | html }}
     </div>
 </footer>
 
@@ -225,3 +249,4 @@
 </body>
 
 </html>
+{{ end }}
