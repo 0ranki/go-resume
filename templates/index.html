@@ -86,9 +86,9 @@
     <div class="container">
         <div class="summary">
             <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                {{ translate "summary" $lang | html }}
+                {{ translate "summary" $lang }}
             </div>
-            <div class="wrapper">{{ .Profile.Summary }}</div>
+            <div class="wrapper">{{ .Profile.Summary | html }}</div>
         </div>
     </div>
     <div class="container">
