@@ -91,3 +91,23 @@ body {
   }
 }
 
+@media print {
+  body:not(.tag) {
+    font-size: 10pt;
+    padding: 20px;
+    max-width: 100%;
+    overflow: hidden !important;
+  }
+  .tag {
+    font-size: 8pt !important;
+  }
+  .noprint {
+    display: none;
+  }
+  .item {
+    page-break-inside: avoid;
+  }
+  html {
+    color-adjust: exact;
+  }
+}

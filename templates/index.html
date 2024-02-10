@@ -8,7 +8,6 @@
 <head>
     {{ template "meta" . }}
     <link rel="stylesheet" href="/static/css/{{ .Theme }}-style.css" />
-
     <style>
     {{ if .Profile.Skills }}
         .skilltag {
@@ -23,7 +22,13 @@
         }
     {{ end }}
     </style>
-
+    <script>function printPage() {
+        if ("{{ .Theme }}" == "dark") {
+            alert("{{ translate "print_dark" $lang }}")
+        } else {
+            window.print();
+        }
+    }</script>
 </head>
 
 <body id="body-app">
@@ -41,12 +46,12 @@
                 <h1 class="title is-size-1">{{ .Profile.Name }}</h1>
                 <p class="subtitle">{{ .Profile.Title }}</p>
             </div>
-            <div class="column is-2">
+            <div class="column">
                 <figure class="image image is-128x128">
                     <img alt="Profile photo" class="is-rounded" src="{{ .Profile.Photo }}" />
                 </figure>
             </div>
-            <div class="column has-text-grey-light has-text-right-in-desktop">
+            <div class="column is-two-fifths has-text-grey-light has-text-right has-text-centered-mobile">
                 <p class="has-text-weight-light">
                     {{ .Profile.City }}
                 </p>
@@ -64,6 +69,14 @@
                 {{ end }}
             </div>
         </div>
+        <div class="noprint">
+            <div class="columns ">
+                <div class="column is-one-fifth has-text-left has-text-centered-mobile">
+                    <button class="button" onclick="printPage()">Print to PDF</button>
+                </div>
+                <div class="column"></div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -71,14 +84,17 @@
 
 <section class="section">
     <div class="container">
+        <div class="summary">
+            <div class="title is-size-5 has-text-primary has-text-weight-bold">
+                {{ translate "summary" $lang | html }}
+            </div>
+            <div class="wrapper">{{ .Profile.Summary }}</div>
+        </div>
+    </div>
+    <div class="container">
         <div class="columns">
             <div class="column is-three-fifths">
-                <div class="summary">
-                    <div class="title is-size-5 has-text-primary has-text-weight-bold">
-                        {{ translate "summary" $lang }}
-                    </div>
-                    <div class="wrapper">{{ .Profile.Summary }}</div>
-                </div>
+
 
                 {{ with .Profile.Experience }}
                 <div class="experience">
@@ -207,7 +223,7 @@
                 {{ end }}
 
                 {{ with .Profile.Certificates }}
-                <div class="certificates">
+                <div class="certificates item">
                     <div class="title is-size-5 has-text-primary has-text-weight-bold">
                         {{ translate "certificates" $lang }}
                     </div>
@@ -232,14 +248,16 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
-        {{ if eq .Theme "light" }}
-        <a href="/dark">{{ translate "see_dark" $lang }}</a>
-        {{ else }}
-        <a href="/light">{{ translate "see_light" $lang }}</a>
-        {{ end }}
-        <br />
-        Copyright © {{ .Year }} {{ .Profile.Name }}. {{ translate "all_rights_reserved" $lang }}
-        <br />
+        <div class="noprint">
+            {{ if eq .Theme "light" }}
+            <a href="/dark">{{ translate "see_dark" $lang }}</a>
+            {{ else }}
+            <a href="/light">{{ translate "see_light" $lang }}</a>
+            {{ end }}
+            <br />
+            Copyright © {{ .Year }} {{ .Profile.Name }}. {{ translate "all_rights_reserved" $lang }}
+            <br />
+        </div>
         {{ translate "powered_by" $lang | html }}
     </div>
 </footer>
