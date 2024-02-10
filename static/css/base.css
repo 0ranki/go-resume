@@ -72,6 +72,8 @@ body {
     text-align: right; } }
 
 @media print {
+  @page {
+    size: A4 portrait; }
   body:not(.tag) {
     font-size: 10pt;
     padding: 20px;
