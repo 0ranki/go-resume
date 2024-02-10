@@ -1,0 +1,86 @@
+# Meta tag configuration
+# All keys correspond to a meta tag name attribute, and value content attribute
+# e.g. <meta name="robots" value="index, follow">
+meta:
+  # Set the content for the robots meta tag (noindex to disable search engine indexing)
+  robots: "index, follow"
+  language: "en-EN"
+  author: "Donald Duck"
+  # theme-color: "#bd93f9"
+  title: ""
+  description: "Professional job applicant"
+  favicon: ""
+  github-corner: false
+theme: "light"
+profile:
+  name: "Donald Duck"
+  title: "Professional job applicant"
+  city: "City, Country"
+  phone: "+358 xx xxx xxxx"
+  email: "your@email.com"
+  photo: "url-to-photo"
+  summary: >-
+    Insert summary here. Multiple
+    lines can be used, but line breaks are determined
+    by the renderer
+  experience:
+    - company: Company 1
+      location: City, country
+      title: Professional employee
+      period: "03/2023 - "
+      description:
+        - Each item in this list
+        - Will be a new item
+        - In the CV
+    - company: Company 2
+      location: City, country
+      title: Professional employee
+      period: "03/2022 - 03/2023"
+      description:
+        - Each item in this list
+        - Will be a new item
+        - In the CV
+    - company: Company 3
+      location: City, country
+      title: Professional employee
+      period: "03/2021 - 03/2022"
+      description:
+        - Each item in this list
+        - Will be a new item
+        - In the CV
+
+  education:
+    - degree: B.S. in Job interviews
+      name: Job interviewee
+      faculty: School for Job applicants
+      city: City, Country
+      period: 1/1996 - 12/1996
+    - degree: Undergraduate of CV Authoring
+      name: Technical writer
+      faculty: School for Job applicants
+      city: City, Country
+      period: 1/1995 - 12/1995
+
+  skills:
+    - name: Skill 1
+      level: 1
+    - name: Skill 2
+      level: 2
+    - name: Skill 3
+      level: 3
+    - name: Skill 4
+      level: 4
+    - name: Skill 5
+      level: 5
+  languages:
+    - name: Language 1
+      level: 5
+    - name: Language 2
+      level: 4
+    - name: Language 1
+      level: 3
+    - name: Language 2
+      level: 2
+
+  ## Not implemented yet
+  socials: []
