@@ -83,6 +83,9 @@ profile:
       level: 3
     - name: Language 2
       level: 2
+  certificates:
+    - name: Boat license
+    - name: CKA
 
   ## Not implemented yet
   socials: []
